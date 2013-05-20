@@ -159,6 +159,12 @@ if (defined('ENVIRONMENT'))
  *  Now that we know the path, set the main path constants
  * -------------------------------------------------------------------
  */
+        /* Constants define by NHD */
+        
+        define('ROOT_PATH', __DIR__);
+        
+        /*END  Constants define by NHD */
+        
 	// The name of THIS file
 	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 

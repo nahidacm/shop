@@ -1,15 +1,18 @@
-<hr>
-
-<div class="footer">
-    <p>&copy; Company 2013</p>
 </div>
+</div>     
+<hr>
+<footer>
+    <p>&copy; iShop 2013</p>
+</footer>
+</div>
+<!--/.fluid-container-->
+<script src="<?php echo base_url('/skins/admin') ?>/vendors/jquery-1.9.1.min.js"></script>
+<script src="<?php echo base_url('/skins/admin') ?>/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url('/skins/admin') ?>/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
+<script src="<?php echo base_url('/skins/admin') ?>/assets/scripts.js"></script>
+<script>
 
-</div> <!-- /container -->
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="<?php echo base_url('/skins/admin') ?>/js/jquery.min.js"></script>
-<script src="<?php echo base_url('/skins/admin') ?>/js/bootstrap.min.js"></script>
+</script>
 </body>
+
 </html>

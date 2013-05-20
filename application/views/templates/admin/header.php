@@ -1,20 +1,60 @@
-<body>
-    <div class="container">
+<body class="<?php echo (isset($body_class)) ? $body_class : '' ?> id="<?php echo (isset($body_id)) ? $body_id : '' ?>>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="<?php echo site_url('/admin') ?>">iShop Admin Panel</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i>
 
-        <div class="masthead">
-            <h3 class="muted">iShop Admin</h3>
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="container">
-                        <ul class="nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Category One</a></li>
-                            <li><a href="#">Category Two</a></li>
-                            <li><a href="#">Category Three</a></li>
-                            <li><a href="#">Category Four</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a tabindex="-1" href="#">Profile</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a tabindex="-1" href="login.html">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-            </div><!-- /.navbar -->
+                <!--/.nav-collapse -->
+            </div>
         </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                    <?php foreach (shop_admin_getLeftMenu() as $menu){ ?>
+                    <li <?php echo ($selected_menu == $menu['url'] )? 'class="active"' : '' ?>>
+                        <a href="<?php echo site_url($menu['url']) ?>"><i class="icon-chevron-right"></i> <?php echo $menu['title'] ?></a>
+                    </li>
+                    <?php } ?>
+                </ul>
+            </div>
+
+            <!--/span-->
+            <div class="span9" id="content">
+                <div class="row-fluid">
+                    <?php 
+                    if(isset($messages)){
+                        foreach ($messages as $message){
+                    ?>
+                    <div class="alert alert-<?php echo $message['type'] ?>">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <?php echo $message['message'] ?>
+                    </div>
+                    <?php
+                        }
+                    }
+                    ?>
+                </div>
