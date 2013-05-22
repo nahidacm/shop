@@ -9,7 +9,23 @@ function shop_admin_getLeftMenu(){
             'title'=>'Create Product',
             'url'=>'admin/product/create'
         ),
+        array(
+            'title'=>'View Products',
+            'url'=>'admin/product/view'
+        ),
     );
     
     return $menu;
+}
+
+function shop_admin_drawCategoryHtml($category_array){
+    
+    $html = '';
+    
+    foreach ($category_array as $category){
+        $html = '<label class="checkbox">
+                    <input type="checkbox" value="'.$category['category_id'].'">
+                    '.$category['category_name'].'
+                </label>';
+    }    
 }
