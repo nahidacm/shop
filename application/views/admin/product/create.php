@@ -46,11 +46,7 @@
                     <div class="controls">
                         <fieldset>
                             <legend>Categories</legend>
-                            <?php //echo makeTree(0, $categories); ?>
-<!--                            <label class="checkbox">
-                                <input type="checkbox" value="">
-                                Option one is this and that—be sure to include why it's great
-                            </label>-->
+                            <?php echo $category_html; ?>
                         </fieldset>
                     </div>
                 </div>

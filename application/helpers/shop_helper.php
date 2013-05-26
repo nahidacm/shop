@@ -20,3 +20,8 @@ function shop_getUploadImgConfig() {
 
     return $config;
 }
+
+function timThumbPath($image_path){
+    
+    return base_url('/images/timthumb.php').'?src='.base_url($image_path);
+}

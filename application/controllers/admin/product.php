@@ -6,7 +6,6 @@ class Product extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('product_model');
         $this->load->library('form_validation');
     }
 
@@ -84,6 +83,9 @@ class Product extends CI_Controller {
             $data['post'] = $product_detail;
         }
 
+        $category_ids = $this->product_model->getProductCategoryIds($product_id);
+        
+        $data['category_html'] = $this->category->html_output(0,TRUE, $category_ids);
         $data['messages'] = $message;
         $data['title'] = 'Update product';
         $data['selected_menu'] = '';
@@ -155,10 +157,8 @@ class Product extends CI_Controller {
         if (shop_hasErrorMessage($message)) {
             $data['post'] = $this->input->post();
         }
-        echo '<pre>';
-            print_r($this->category_model->getCategories());
-        echo '</pre>';
-        $data['categories'] = $this->category_model->getCategories();
+        
+        $data['category_html'] = $this->category->html_output();
         $data['messages'] = $message;
         $data['title'] = 'Create new product';
         $data['selected_menu'] = 'admin/product/create';

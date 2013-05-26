@@ -6,8 +6,10 @@ if (!defined('BASEPATH'))
 class Home extends CI_Controller {
 
     public function index() {
-        $data['content'] = 'Here is all the contents';
         
+        $products = $this->product_model->getProducts();
+        
+        $data['products'] = $products;
         $this->_loadView(__FUNCTION__, $data);
     }
 
