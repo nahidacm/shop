@@ -8,7 +8,6 @@ class Home extends CI_Controller {
     public function index() {
         
         $products = $this->product_model->getProducts();
-        
         $data['products'] = $products;
         $this->_loadView(__FUNCTION__, $data);
     }

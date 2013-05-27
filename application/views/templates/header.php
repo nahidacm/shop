@@ -9,10 +9,10 @@
                         <h3 class="muted">iShop</h3>
                     </div>
                     <div class="span2" class="cart_items">
-                        Items : <span class="badge badge-warning">4</span>
+                        Items : <span class="badge badge-warning"><?php echo $this->cart->total_items() ?></span>
                     </div>
                     <div class="span3" class="total_price">
-                        Total Price : <span class="badge badge-important">6</span>
+                        Total Price : Tk.<span class="badge badge-important"><?php echo $this->cart->total() ?></span>
                     </div>
                     <div class="span4">
                         <button class="span4 btn btn-success">Check out</button>
