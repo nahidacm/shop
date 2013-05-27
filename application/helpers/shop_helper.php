@@ -21,6 +21,11 @@ function shop_getUploadImgConfig() {
     return $config;
 }
 
+
+function catalog_image($image_path){
+    
+    return base_url('/images/timthumb.php').'?src='.base_url($image_path).'&h=200';
+}
 function timThumbPath($image_path){
     
     return base_url('/images/timthumb.php').'?src='.base_url($image_path);

@@ -53,9 +53,13 @@ class Product_model extends CI_Model {
 
     public function getProducts() {
         $query = $this->db->get('product');
-        $result = $query->result_array();
+        $products = $query->result_array();
+        
+        foreach ($products as $product_key=>$product) {
+            $products[$product_key]['image'] = $this->getProductImage($product['product_id']);
+        }
 
-        return $result;
+        return $products;
     }
 
     public function updateProduct($product_id) {
@@ -108,9 +112,12 @@ class Product_model extends CI_Model {
     }
 
     public function deleteProductImage($product_id) {
-        $previous_image_path = ROOT_PATH . '/' . $this->getProductImage($product_id);
-        if (file_exists($previous_image_path))
-            unlink($previous_image_path);
+        $product_image = $this->getProductImage($product_id);
+        if($product_image){
+            $previous_image_path = ROOT_PATH . '/' . $this->getProductImage($product_id);
+            if (file_exists($previous_image_path))
+                unlink($previous_image_path);
+        }
     }
 
     public function updateProductImageInfo($product_id, $upload_data) {
@@ -119,9 +126,17 @@ class Product_model extends CI_Model {
 
         $data = array(
             'product_image_path' => 'uploads/product_images/' . $upload_data['file_name'],
+            'product_image_product_id' => $product_id,
         );
-        if ($this->db->update('product_images', $data, "product_image_product_id = $product_id"))
-            return $this->db->insert_id();
+        
+        $image_update_flag = false;
+        if($this->db->get('product_images',"product_image_product_id = $product_id")->num_rows()>0)
+            $image_update_flag = $this->db->update('product_images', $data, "product_image_product_id = $product_id");
+        else
+            $image_update_flag = $this->db->insert('product_images', $data);
+        
+        if ($image_update_flag)
+            return TRUE;
         else
             return FALSE;
     }
@@ -129,7 +144,12 @@ class Product_model extends CI_Model {
     public function getProductImage($product_id) {
         $this->db->select('product_image_path');
         $query = $this->db->get_where('product_images', array('product_image_product_id' => $product_id));
-        $row = $query->row_array();
+        
+        if($query->num_rows() > 0)
+            $row = $query->row_array();
+        else
+            return FALSE;
+        
         $product_image_path = $row['product_image_path'];
 
         return $product_image_path;

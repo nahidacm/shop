@@ -50,19 +50,20 @@
                         </fieldset>
                     </div>
                 </div>
+                <?php if((isset($post['product_image_path']))){ ?>
                 <div class="control-group">
                     <label class="control-label" for="product_image"></label>
                     <div class="controls">
                         <img class="img-polaroid" src="<?php echo timThumbPath($post['product_image_path']) ?>" alt="Image Missing" /> 
                     </div>
                 </div>
+                <?php } ?>
                 <div class="control-group">
                     <label class="control-label" for="product_image">Image</label>
                     <div class="controls">
                         <input class="input-xxlarge" type="file" id="product_image" name="product_image">
                     </div>
                 </div>
-                
                 <div class="control-group">
                     <div class="controls">
                         <button type="submit" class="btn btn-primary">Save</button>
