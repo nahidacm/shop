@@ -16,6 +16,8 @@ config.base_url = "http://localhost/shop/";
  */
 config.addToCartBtn = '.addTocartBtn';
 
+config.checkoutBtn = '.checkoutBtn';
+
 /*
  * Frontend quantity field id prefix
  * @type String

@@ -16,7 +16,11 @@ function getAddToCartHtml($product) {
 
     return $html;
 }
-
+function getCheckOutButton(){
+    $html = '<button class="checkoutBtn span4 btn btn-success">Check out</button>';
+    
+    return $html;
+}
 function get_system_scripts() {
     $html = '<script src="' . base_url('/js') . '/config.js"></script>
             <script src="' . base_url('/js') . '/frontend.js"></script>';

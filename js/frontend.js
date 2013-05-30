@@ -9,4 +9,9 @@ $(document).ready(function(){
        window.location.href = config.base_url+'index.php/cart/add/'+product_id+'/'+quantity; 
     });
     
+    $(config.checkoutBtn).click(function(){
+        
+       window.location.href = config.base_url+'index.php/checkout'; 
+    });
+    
 });

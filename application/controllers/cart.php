@@ -4,14 +4,6 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Cart extends CI_Controller {
-//
-//    public function index() {
-//
-//        $products = $this->product_model->getProducts();
-//
-//        $data['products'] = $products;
-//        $this->_loadView(__FUNCTION__, $data);
-//    }
 
     public function add($product_id, $quantity) {
        
@@ -36,14 +28,6 @@ class Cart extends CI_Controller {
 
         redirect( $_SERVER['HTTP_REFERER'] );
     }
-//
-//    private function _loadView($view, $data) {
-//        $view_folder = 'cart';
-//        $this->load->view('templates/head', $data);
-//        $this->load->view('templates/header', $data);
-//        $this->load->view($view_folder . '/' . $view, $data);
-//        $this->load->view('templates/footer');
-//    }
 
 }
 

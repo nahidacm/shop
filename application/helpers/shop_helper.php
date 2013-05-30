@@ -11,6 +11,13 @@ function shop_hasErrorMessage($messages) {
     return $flag;
 }
 
+/*
+ * Back to refferer page
+ */
+function redirect_back(){
+    redirect( $_SERVER['HTTP_REFERER'] );
+}
+
 function shop_getUploadImgConfig() {
     $config['upload_path'] = ROOT_PATH . '/uploads/product_images';
     $config['allowed_types'] = 'gif|jpg|png';
