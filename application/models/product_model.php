@@ -57,6 +57,25 @@ class Product_model extends CI_Model {
         return $category_ids;
     }
 
+    public function getCategoryProducts( $category_id ) {
+        $this->db->select('*');
+        $this->db->from( 'product' );
+        $this->db->join( 'product_category_map', 
+                'product_category_map.product_category_map_product_id = product.product_id', 'left' );
+        $this->db->join( 'category', 
+                'category.id = product_category_map.product_category_map_category_id', 'left' );
+        $this->db->where( 'category.id', $category_id );
+        $query = $this->db->get();
+        
+        $products = $query->result_array();
+        
+        foreach ($products as $product_key=>$product) {
+            $products[$product_key]['image'] = $this->getProductImage($product['product_id']);
+        }
+
+        return $products;
+    }
+    
     public function getProducts() {
         $query = $this->db->get('product');
         $products = $query->result_array();

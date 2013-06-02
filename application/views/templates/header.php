@@ -39,14 +39,15 @@
                 <div class="navbar">
                     <div class="navbar-inner">
                         <div class="container">
-                            <ul class="nav">
+<!--                            <ul class="nav">
                                 <li class="active"><a href="#">Home</a></li>
                                 <li><a href="#">Category One</a></li>
                                 <li><a href="#">Category Two</a></li>
                                 <li><a href="#">Category Three</a></li>
                                 <li><a href="#">Category Four</a></li>
                                 <li><a href="#">Contact</a></li>
-                            </ul>
+                            </ul>-->
+                            <?php echo $this->category->front_menu_html() ?>
                         </div>
                     </div>
                 </div><!-- /.navbar -->

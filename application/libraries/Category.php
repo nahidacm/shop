@@ -222,6 +222,48 @@ class Category {
         return $children;
     }
     
+    function front_menu_html() {
+        
+        if(uri_string() == '')
+            $home_menu = '<li class="active"><a href="'.  base_url().'">Home</a></li>';
+        else
+            $home_menu = '<li><a href="'.  base_url().'">Home</a></li>';
+        
+        $HtmlTree = array(
+            "header" => '<ul class="nav">'.$home_menu,
+            "body" => '<li><a href="'.  site_url('home/category/[id]').'">[name]</a></li>',
+            "body_selected" => '<li class="active"><a href="'.  site_url('home/category/[id]').'">[name]</a></li>',
+            "footer" => '</ul>',
+        );
+        
+        $tree = $this->build_list(0); // we have selected to view category
+        var_dump($tree);
+
+        $output = "";
+        $output .= $HtmlTree['header'];
+
+        if (is_array($tree)) {
+            foreach ($tree as $c) {
+
+                if(uri_string() == 'home/category/'.$c['id'])
+                    $body = $HtmlTree['body_selected'];
+                else
+                    $body = $HtmlTree['body'];
+
+                foreach ($this->fields as $name => $field_name) {
+                    $body = str_replace("[$name]", $c["$field_name"], $body);
+                }
+                $body = str_replace("[prefix]", $c['prefix'], $body);
+
+                $output .= $body;
+            }
+        }
+
+        $output .= $HtmlTree['footer'];
+        
+        return $output;
+    }
+    
     function html_output($id = 0, $edit_mood = FALSE, $selected_items = array()) {
         $tree = $this->build_list($id); // we have selected to view category
 

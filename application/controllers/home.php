@@ -11,6 +11,12 @@ class Home extends CI_Controller {
         $data['products'] = $products;
         $this->_loadView(__FUNCTION__, $data);
     }
+    
+    function category($category_id){
+        $products = $this->product_model->getCategoryProducts( $category_id );
+        $data['products'] = $products;
+        $this->_loadView(__FUNCTION__, $data);
+    }
 
     private function _loadView($view,$data) {
         $view_folder = 'home';
