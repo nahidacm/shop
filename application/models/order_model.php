@@ -18,7 +18,7 @@ class Order_model extends CI_Model {
             'order_customer_mobile' => $customer_info['customer_mobile'],
             'order_shipping_address' => $shipping_address_string,
             'order_status' => 'new',
-            'order_time' => time(),
+            'order_time' => date('Y-m-d H:i:s'),
         );
 
         if ($this->db->insert('order', $data)) {

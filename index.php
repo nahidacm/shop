@@ -198,6 +198,10 @@ if (defined('ENVIRONMENT'))
 	}
 
 /*
+ * Set Default timezone
+ */
+        date_default_timezone_set('Asia/Dhaka');
+/*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
  * --------------------------------------------------------------------
