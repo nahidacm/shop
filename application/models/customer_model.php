@@ -18,6 +18,18 @@ class Customer_model extends CI_Model {
             return FALSE;
         }
     }
+    function getLogedInCustomer(){
+        $customer_id = $this->session->userdata('customer_id');
+        $this->db->where("customer_id = '$customer_id'");
+        $query = $this->db->get('customer');
+        
+        if ($query->num_rows() > 0) {
+            $row = $query->row_array();
+            return $row;
+        }  else {
+            return FALSE;
+        }
+    }
 
     public function saveCustomer() {
 

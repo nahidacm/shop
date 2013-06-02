@@ -14,6 +14,12 @@ class Product_model extends CI_Model {
         else
             return FALSE;
     }
+    function get_stock($sku){
+        $query =$this->db->get('product',array('product_sku'=>$sku));
+        $row = $query->row_array();
+        
+        return $row['product_stock'];
+    }
 
     public function getProductDetail($product_id) {
         $this->db->select('*');

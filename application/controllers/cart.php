@@ -4,6 +4,20 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Cart extends CI_Controller {
+    
+    function update(){
+        
+        //var_dump($this->input->post(NULL, TRUE));
+        $data = $this->input->post(NULL, TRUE);
+        $this->cart->update($data);
+        $this->session->set_flashdata('message', 
+                array(
+                    'type'=>'success',
+                    'message'=>'Cart Updated'
+                )
+            );
+        redirect( $_SERVER['HTTP_REFERER'] );
+    }
 
     public function add($product_id, $quantity) {
        
