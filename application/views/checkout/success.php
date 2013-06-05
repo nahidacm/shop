@@ -11,5 +11,5 @@ if ($message) {
 <div class="row-fluid">
     <h4>Thanks for shopping with us, We will call you after a while...</h4>
     <h6>Your order id is: <?php echo $order_id ?></h6>
-    <a href="#" class="btn">Continue Shopping</a>
+    <a href="<?php echo base_url() ?>" class="btn">Continue Shopping</a>
 </div>

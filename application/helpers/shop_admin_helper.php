@@ -13,6 +13,10 @@ function shop_admin_getLeftMenu(){
             'title'=>'View Products',
             'url'=>'admin/product/view'
         ),
+        array(
+            'title'=>'Orders',
+            'url'=>'admin/order'
+        ),
     );
     
     return $menu;

@@ -5,6 +5,42 @@ class Order_model extends CI_Model {
     public function __construct() {
         $this->load->database();
     }
+    
+    function getOrders(){
+        
+        $query = $this->db->order_by("order_time", "desc")->get('order');
+        $orders = $query->result_array();
+        
+        return $orders;
+    }
+    
+    function getOrder($order_id){
+        $this->db->select('order.*, customer.*, 
+            SUM(order_item.order_item_price * order_item.order_item_quantity) AS total_price,
+            SUM(order_item.order_item_quantity) AS total_items');
+        $this->db->from('order');
+        $this->db->join('customer', 'customer.customer_id = order.order_customer_id','left');
+        $this->db->join('order_item', 'order_item.order_item_order_id = order.order_id','left');
+        $this->db->where( 'order.order_id', $order_id );
+        $this->db->group_by("order.order_id");
+        
+        $query = $this->db->get();
+  
+        $order = $query->row_array();
+        
+        return $order;
+    }
+    
+    function getOrderItems($order_id){
+        $query = $this->db->get_where('order_item', array( 'order_item_order_id'=>$order_id ));
+        
+        return $query->result_array() ;
+    }
+            
+    function update_order_status($order_id,$order_status){
+        $this->db->where('order_id', $order_id);
+        $this->db->update('order', array('order_status'=>$order_status)); 
+    }
 
     public function generateOrder() {
 

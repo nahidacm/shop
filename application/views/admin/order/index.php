@@ -24,7 +24,7 @@
                             <td><?php echo $order['order_customer_mobile'] ?></td>
                             <td><?php echo $order['order_status'] ?></td>
                             <td>
-                                <a href="#">View</a>
+                                <a href="<?php echo site_url( 'admin/order/view/'.$order['order_id'] ) ?>">View</a>
                             </td>
                         </tr>
                     <?php } ?>

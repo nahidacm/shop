@@ -237,8 +237,7 @@ class Category {
         );
         
         $tree = $this->build_list(0); // we have selected to view category
-        var_dump($tree);
-
+        
         $output = "";
         $output .= $HtmlTree['header'];
 

@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Home extends CI_Controller {
 
     public function index() {
-        $data['content'] = 'Here is all the contents';
+        $data['orders'] = $this->order_model->getOrders();
         $data['title'] = 'Dashboard';
         $data['selected_menu'] = 'admin';
 
