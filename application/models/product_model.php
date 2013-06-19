@@ -75,18 +75,43 @@ class Product_model extends CI_Model {
 
         return $products;
     }
-    
-    public function getProducts() {
-        $query = $this->db->get('product');
+    function getAssociatedProducts( $product_id ){
+        $this->db->select('*')
+                ->from('associated_product')
+                ->join('product', 
+                        'associated_product.associated_product_simple_product_id = product.product_id','left')
+                ->where("associated_product.associated_product_configurable_product_id = $product_id AND product.product_stock > 0");
+        
+        $query = $this->db->get();
+        $associated_products = $query->result_array();
+        
+        return $associated_products;
+    }
+
+    public function getProducts( $where = array(), $limit = NULL, $offset = NULL ) {
+        $defaults = array(
+            'product_stock >' => 0,
+        );
+        $where = array_merge($defaults,$where);
+        $query = $this->db->get_where('product',$where,$limit,$offset);
         $products = $query->result_array();
         
         foreach ($products as $product_key=>$product) {
             $products[$product_key]['image'] = $this->getProductImage($product['product_id']);
+            
+            if($product['product_type'] == CONFIGURABLE_PRODUCT ){
+                $associated_products = $this->product_model->getAssociatedProducts($product['product_id']);
+                
+                if( count( $associated_products ) > 0 )
+                    $products[$product_key]['associated_products'] = $this->product_model->getAssociatedProducts($product['product_id']);
+                else
+                    unset ( $products[$product_key] ); //Configurable product does not have any associated product, so do not present in frontend
+            }
         }
 
         return $products;
     }
-
+    
     public function updateProduct($product_id) {
 
         $data = array(
@@ -188,6 +213,7 @@ class Product_model extends CI_Model {
             'product_price' => $this->input->post('product_price'),
             'product_stock' => $this->input->post('product_stock'),
             'product_sku' => $this->input->post('product_sku'),
+            'product_type' => $this->input->post('product_type'),
         );
 
 
@@ -202,10 +228,23 @@ class Product_model extends CI_Model {
                 foreach ($category_ids as $category_id) {
                     $cat_data [] = array(
                         'product_category_map_product_id' => $created_product_id,
-                        'product_category_map_category_id' => $category_id);
+                        'product_category_map_category_id' => $category_id );
                 }
                 $this->db->insert_batch('product_category_map', $cat_data);
             }
+            
+            //Save associated products
+            if( $this->input->post('product_type')== CONFIGURABLE_PRODUCT ){
+                $associated_products = $this->input->post('associated_products');
+                $associated_product_data = array();
+                foreach ( $associated_products as $associated_product ) {
+                    $associated_product_data [] = array(
+                        'associated_product_simple_product_id' => $associated_product,
+                        'associated_product_configurable_product_id' => $created_product_id );
+                }
+                $this->db->insert_batch('associated_product', $associated_product_data);
+            }
+            
             return $created_product_id;
         } else {
             return FALSE;

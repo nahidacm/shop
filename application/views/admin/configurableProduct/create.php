@@ -6,8 +6,9 @@
         </div>
         <div class="block-content">
             <form method="post" action="" class="form-horizontal" enctype="multipart/form-data">
-                <!-- Simple Product -->
-                <input type="hidden" name="product_type" value="1" />
+                <!-- configurable product -->
+                <input type="hidden" name="product_type" value="2" />
+                
                 <div class="control-group">
                     <label class="control-label" for="product_name">Name</label>
                     <div class="controls">
@@ -47,11 +48,54 @@
                     <label class="control-label"></label>
                     <div class="controls">
                         <fieldset>
+                            <legend>Associated Products</legend>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="check_all_configurable_product" /></th>
+                                        <th>ID</th>
+                                        <th>SKU</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                    </tr>
+                                    <tr>
+                                        <th><span class="btn btn-info btn-small">Filter</span></th>
+                                        <th><input type="text" id="filter_product_id" class="input-mini" /></th>
+                                        <th><input type="text" id="filter_product_sku" class="input-mini" /></th>
+                                        <th><input type="text" id="filter_product_name" /></th>
+                                        <th><input type="text" id="filter_product_price" class="input-mini" /></th>
+                                        <th><input type="text" id="filter_product_stock" class="input-mini" /></th>
+                                    </tr>
+                                    <?php foreach ( $associated_products as $associated_product ){ ?>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="filtered_products" name="associated_products[]" 
+                                                   value="<?php echo $associated_product['product_id'] ?>" />
+                                        </td>
+                                        <td><?php echo $associated_product['product_id'] ?></td>
+                                        <td><?php echo $associated_product['product_sku'] ?></td>
+                                        <td><?php echo $associated_product['product_name'] ?></td>
+                                        <td><?php echo $associated_product['product_price'] ?></td>
+                                        <td><?php echo $associated_product['product_stock'] ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </thead>
+                            </table>
+                            <input type="hidden" id="associated_product_list" value=""/>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <fieldset>
                             <legend>Categories</legend>
                             <?php echo $category_html; ?>
                         </fieldset>
                     </div>
                 </div>
+                
                 <div class="control-group">
                     <label class="control-label" for="product_image">Image</label>
                     <div class="controls">

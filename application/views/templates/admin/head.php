@@ -7,6 +7,8 @@
         <link href="<?php echo base_url('/skins/admin') ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="<?php echo base_url('/skins/admin') ?>/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="<?php echo base_url('/skins/admin') ?>/assets/styles.css" rel="stylesheet" media="screen">
+        
+        <!--<link href="<?php echo base_url('/skins/admin') ?>/select2/select2.css" rel="stylesheet"/>-->
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

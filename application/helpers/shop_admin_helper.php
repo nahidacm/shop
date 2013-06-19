@@ -6,8 +6,12 @@ function shop_admin_getLeftMenu(){
             'url'=>'admin'
         ),
         array(
-            'title'=>'Create Product',
+            'title'=>'Create Simple Product',
             'url'=>'admin/product/create'
+        ),
+        array(
+            'title'=>'Create Configurable Product',
+            'url'=>'admin/configurableProduct/create'
         ),
         array(
             'title'=>'View Products',
