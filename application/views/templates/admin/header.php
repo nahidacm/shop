@@ -8,10 +8,13 @@
                 </a>
                 <a class="brand" href="<?php echo site_url('/admin') ?>">iShop Admin Panel</a>
                 <div class="nav-collapse collapse">
+                    <?php if($this->session->userdata( 'admin_user_name' )){ ?>
                     <ul class="nav pull-right">
                         <li class="dropdown">
-                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Admin <i class="caret"></i>
-
+                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> 
+                                <i class="icon-user"></i>
+                                <?php echo $this->session->userdata( 'admin_user_name' ) ?> 
+                                <i class="caret"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -19,11 +22,12 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a tabindex="-1" href="login.html">Logout</a>
+                                    <a tabindex="-1" href="<?php echo site_url('/admin/home/logout') ?>">Logout</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
+                    <?php } ?>
                 </div>
                 <!--/.nav-collapse -->
             </div>
