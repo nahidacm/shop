@@ -35,8 +35,13 @@ class Customer extends CI_Controller {
                     'message' => 'Login Success '.$this->session->userdata('customer_name')
                         )
                 );
+                if($this->cart->total_items()>0){
+                    redirect('/checkout');
+                }
+                else {
+                    redirect('home');
+                }
 
-                redirect('/checkout');
             } else {
                 $this->session->set_flashdata('message', array(
                     'type' => 'error',

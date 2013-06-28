@@ -31,7 +31,7 @@
                         
                         <?php }else{ ?>
                         
-                            <a class="pull-right" href="<?php echo site_url('customer/login') ?>">Login/Register</a>
+                            <a class="pull-right" href="<?php echo site_url('customer') ?>">Login/Register</a>
                         
                         <?php } ?> 
                     </div>
