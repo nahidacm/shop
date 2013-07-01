@@ -100,6 +100,21 @@ class Product extends CI_Controller {
         
         $products = $this->product_model->getProducts();
         
+        /*
+        $this->load->helper('datagrid');
+        $datagrid = new Datagrid($products);
+        $datagrid->setHeader( array(
+                    'product_id'=>'#',
+                    'product_name'=>'Product Name',
+                    'product_sku'=>'Product SKU',
+                )
+            );
+        $datagrid->setPrimaryKeyIndex('product_id');
+        $datagrid->setTableProperty('class="table table-striped"');
+        $product_table = $datagrid->getGridHtml();
+        */
+        
+        $data['product_table'] = $product_table;
         $data['messages'] = $message;
         $data['products'] = $products;
         $data['selected_menu'] = 'admin/product/view';
