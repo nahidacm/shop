@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Dynamic datagrid class.
@@ -23,7 +23,7 @@ class Datagrid {
      * @param array $data sets the data for datagrid
      */
     function __construct($data = array()) {
-        $this->CI = & get_instance();
+        $this->CI =& get_instance();
         $this->setData($data);
     }
     
@@ -35,6 +35,7 @@ class Datagrid {
      * @return null Nothing to return
      */
     function getGridHtml() {
+        
         if (empty($this->_data))
             exit('Nothing to render...');
 
@@ -43,7 +44,7 @@ class Datagrid {
         $html .= '<thead>
                 <tr>';
         foreach ($this->_headers as $header) {
-            $html .= '<td>' . $header . '</td>';
+            $html .= '<th>' . $header . '</th>';
         }
         if (!empty($this->_actions))
             $html .= '<td>Action</td>';
@@ -61,7 +62,7 @@ class Datagrid {
             }
             if (!empty($this->_actions)){
                 $html .= '<td>';
-                $html .= $this->getActionColumn( $row[$this->_primary_key_index] );
+                $html .= $this->_getActionColumn( $row[$this->_primary_key_index] );
                 $html .= '</td>';
             }
             $html .= '</tr>';
@@ -117,7 +118,7 @@ class Datagrid {
      *          'url' => 'product/edit',
      *           'class' => 'edit_action'
      *     ),
-     *      'edit'=>array(
+     *      'view'=>array(
      *           'title' => 'View',
      *           'url' => 'product/view',
      *           'class' => 'view_action'
@@ -132,12 +133,16 @@ class Datagrid {
         return $this;
     }
 
-    function getActionColumn($current_key) {
-        $html = '';
+    private function _getActionColumn($current_key) {
         
-        foreach ( $this->actions as $action ){
-            $html = '<a href=' . $this->CI->base_url( $action['url'] . '/' . $current_key ) . '" 
-            class="' . $action['class'] . '">' . $action['title'] . '</a>';
+        $html = '';
+        $count = 0;
+        foreach ( $this->_actions as $action ){
+            
+            if($count++ > 0) 
+                $html .= ' | ';
+            $url = ( $action['url'] == '#' )?'#': site_url( $action['url'] . '/' . $current_key );   
+            $html .= '<a href="' . $url . '" class="' . $action['class'] . '">' . $action['title'] . '</a>';
         }
 
         return $html;

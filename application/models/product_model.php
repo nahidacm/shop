@@ -88,6 +88,13 @@ class Product_model extends CI_Model {
         return $associated_products;
     }
 
+    /**
+     * 
+     * @param array $where WHERE condition EX: <code>array('product_stock >' => 0,);</code>
+     * @param type $limit the LIMIT
+     * @param type $offset the offset value
+     * @return array the product list
+     */
     public function getProducts( $where = array(), $limit = NULL, $offset = NULL ) {
         $defaults = array(
             'product_stock >' => 0,
